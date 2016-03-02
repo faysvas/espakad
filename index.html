@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
+<meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="dirPagination.js"></script>
 <style>
@@ -20,14 +20,14 @@
    <input type="text" class="form-control" placeholder="Search" ng-model="searchEspa">
 <table class="table">
     <tr>
-        <th ng-click="sort('FIELD1')">Τομέας</th>
-        <th ng-click="sort('FIELD2')">2ψήφιος NACE</th>
-        <th ng-click="sort('FIELD3')">3ψήφιος NACE</th>
-		<th ng-click="sort('FIELD4')">4ψήφιος NACE</th>
-		<th ng-click="sort('FIELD5')">Κωδικός Δραστηριότητας</th>
-		<th ng-click="sort('FIELD6')">Επίπεδο</th>
-		<th ng-click="sort('FIELD7')">Περιγραφή Δραστηριότητας</th>
-		<th ng-click="sort('FIELD8')">Τομείς Προτεραιότητας</th>
+        <th ng-click="sort('FIELD1')">Ξ¤ΞΏΞΌΞ­Ξ±Ο‚</th>
+        <th ng-click="sort('FIELD2')">2ΟΞ®Ο†ΞΉΞΏΟ‚ NACE</th>
+        <th ng-click="sort('FIELD3')">3ΟΞ®Ο†ΞΉΞΏΟ‚ NACE</th>
+		<th ng-click="sort('FIELD4')">4ΟΞ®Ο†ΞΉΞΏΟ‚ NACE</th>
+		<th ng-click="sort('FIELD5')">ΞΟ‰Ξ΄ΞΉΞΊΟΟ‚ Ξ”ΟΞ±ΟƒΟ„Ξ·ΟΞΉΟΟ„Ξ·Ο„Ξ±Ο‚</th>
+		<th ng-click="sort('FIELD6')">Ξ•Ο€Ξ―Ο€ΞµΞ΄ΞΏ</th>
+		<th ng-click="sort('FIELD7')">Ξ ΞµΟΞΉΞ³ΟΞ±Ο†Ξ® Ξ”ΟΞ±ΟƒΟ„Ξ·ΟΞΉΟΟ„Ξ·Ο„Ξ±Ο‚</th>
+		<th ng-click="sort('FIELD8')">Ξ¤ΞΏΞΌΞµΞ―Ο‚ Ξ ΟΞΏΟ„ΞµΟΞ±ΞΉΟΟ„Ξ·Ο„Ξ±Ο‚</th>
     </tr>
 	
      <tr dir-paginate="field in fields|orderBy:sortKey:reverse|filter:searchEspa|itemsPerPage:100">
