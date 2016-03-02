@@ -2,6 +2,7 @@
 <html>
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="angular-filter.min.js"></script>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="dirPagination.js"></script>
@@ -11,37 +12,91 @@
 [x-ng-click] {
     cursor: pointer;
 }
+
+#row1{
+width:20%;
+}
+
+#row2{
+width:20%;
+}
+#row3{
+width:5%;
+}
+#row4{
+width:5%;
+}#row5{
+width:5%;
+}
+#row6{
+width:5%;
+}
+#row7{
+width:20%;
+}#row8{
+width:20%;
+}
+
+
 </style>
 </head>
 <body>
 <div class="container" ng-app="espaApp" ng-controller="espaCtrl">
 <div class="row">
-</div class="col-sm-12">
-   <input type="text" class="form-control" placeholder="Search" ng-model="searchEspa">
-<table class="table">
+<div class="col-sm-12">
+  
+   <div class="table-responsive">
+<table class="table table-condensed table-bordered">
+ <thead>
+
     <tr>
-        <th ng-click="sort('FIELD1')">Τομέας</th>
-        <th ng-click="sort('FIELD2')">2ψήφιος NACE</th>
-        <th ng-click="sort('FIELD3')">3ψήφιος NACE</th>
-		<th ng-click="sort('FIELD4')">4ψήφιος NACE</th>
-		<th ng-click="sort('FIELD5')">Κωδικός Δραστηριότητας</th>
-		<th ng-click="sort('FIELD6')">Επίπεδο</th>
-		<th ng-click="sort('FIELD7')">Περιγραφή Δραστηριότητας</th>
-		<th ng-click="sort('FIELD8')">Τομείς Προτεραιότητας</th>
+		<th id="row0" >Αρ.</th>
+        <th id="row1" ng-click="sort('FIELD1')">Τομέας</th>
+        <th id="row2" ng-click="sort('FIELD2')">2ψήφιος NACE</th>
+        <th id="row3" ng-click="sort('FIELD3')">3ψήφιος NACE</th>
+		<th id="row4" ng-click="sort('FIELD4')">4ψήφιος NACE</th>
+		<th id="row5" ng-click="sort('FIELD5')">Κωδικός Δραστηριότητας</th>
+		<th id="row6" ng-click="sort('FIELD6')">Επίπεδο</th>
+		<th id="row7"ng-click="sort('FIELD7')">Περιγραφή Δραστηριότητας</th>
+		<th id="row8"ng-click="sort('FIELD8')">Τομείς Προτεραιότητας</th>
     </tr>
+	</thead>
+	<tbody>
 	
-     <tr dir-paginate="field in fields|orderBy:sortKey:reverse|filter:searchEspa|itemsPerPage:100">
-        <td>{{field.FIELD1}}</td>
-        <td>{{field.FIELD2}}</td>
-        <td>{{field.FIELD3}}</td>
-		<td>{{field.FIELD4}}</td>
-		<td>{{field.FIELD5}}</td>
-		<td>{{field.FIELD6}}</td>
-		<td>{{field.FIELD7}}</td>
-		<td>{{field.FIELD8}}</td>
+	<tr>
+	<td><button class="btn" ng-click="search = ''">Clear</button></td>
+	<td >
+ <select class="form-control" ng-model="search.FIELD1" ng-options="tomeas for tomeas in tomeis|unique:tomeas">
+ <option value="" disabled selected>Τομείς</option>
+        </select>
+</td>
+
+<td> <input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD2"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD3"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD4"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD5"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD6"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD7"></td>
+<td > <select class="form-control" ng-model="search.FIELD8" ng-options="prot for prot in proter|unique:prot">
+<option value="" disabled selected>Τομείς Προτεραιότητας</option>
+        </select></td>
+		
+		
+</tr>
+     <tr dir-paginate="field in fields|orderBy:sortKey:reverse|filter:{FIELD1: search.FIELD1, FIELD2: search.FIELD2, FIELD3: search.FIELD3, FIELD4: search.FIELD4, FIELD5: search.FIELD5, FIELD6: search.FIELD6, FIELD7: search.FIELD7, FIELD8: search.FIELD8}|itemsPerPage:100">
+	 <td>{{::$index+1}}</td>
+        <td>{{::field.FIELD1}}</td>
+        <td>{{::field.FIELD2}}</td>
+        <td>{{::field.FIELD3}}</td>
+		<td>{{::field.FIELD4}}</td>
+		<td>{{::field.FIELD5}}</td>
+		<td>{{::field.FIELD6}}</td>
+		<td>{{::field.FIELD7}}</td>
+		<td>{{::field.FIELD8}}</td>
     </tr>
-   
+    </tbody>
   </table>
+  </div>
   <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" >
     </dir-pagination-controls>
 	</div>
@@ -49,12 +104,21 @@
 </div>
 
 <script>
-var phonecatApp = angular.module('espaApp', ['angularUtils.directives.dirPagination']);
+var espaApp = angular.module('espaApp', ['angularUtils.directives.dirPagination','angular.filter']);
 
-phonecatApp.controller('espaCtrl', function ($scope, $http) {
+espaApp.controller('espaCtrl', function ($scope, $http) {
 $scope.reverse = true;
+$scope.tomeis=[];
+$scope.proter=[];
   $http.get('neofuhs_espa.json').success(function(data) {
-  console.log(data);
+ for(var key in data){
+	$scope.tomeis.push(data[key].FIELD1);
+	}
+	
+	 for(var key in data){
+	$scope.proter.push(data[key].FIELD8);
+	}
+	
     $scope.fields = data;
   });
    $scope.sort = function(keyname){
