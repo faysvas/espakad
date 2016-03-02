@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="dirPagination.js"></script>
+<style>
+[ng-click],
+[data-ng-click],
+[x-ng-click] {
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="container" ng-app="espaApp" ng-controller="espaCtrl">
+<div class="row">
+</div class="col-sm-12">
+   <input type="text" class="form-control" placeholder="Search" ng-model="searchEspa">
+<table class="table">
+    <tr>
+        <th ng-click="sort('FIELD1')">Τομέας</th>
+        <th ng-click="sort('FIELD2')">2ψήφιος NACE</th>
+        <th ng-click="sort('FIELD3')">3ψήφιος NACE</th>
+		<th ng-click="sort('FIELD4')">4ψήφιος NACE</th>
+		<th ng-click="sort('FIELD5')">Κωδικός Δραστηριότητας</th>
+		<th ng-click="sort('FIELD6')">Επίπεδο</th>
+		<th ng-click="sort('FIELD7')">Περιγραφή Δραστηριότητας</th>
+		<th ng-click="sort('FIELD8')">Τομείς Προτεραιότητας</th>
+    </tr>
+	
+     <tr dir-paginate="field in fields|orderBy:sortKey:reverse|filter:searchEspa|itemsPerPage:100">
+        <td>{{field.FIELD1}}</td>
+        <td>{{field.FIELD2}}</td>
+        <td>{{field.FIELD3}}</td>
+		<td>{{field.FIELD4}}</td>
+		<td>{{field.FIELD5}}</td>
+		<td>{{field.FIELD6}}</td>
+		<td>{{field.FIELD7}}</td>
+		<td>{{field.FIELD8}}</td>
+    </tr>
+   
+  </table>
+  <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" >
+    </dir-pagination-controls>
+	</div>
+</div>
+</div>
+
+<script>
+var phonecatApp = angular.module('espaApp', ['angularUtils.directives.dirPagination']);
+
+phonecatApp.controller('espaCtrl', function ($scope, $http) {
+$scope.reverse = true;
+  $http.get('neofuhs_espa.json').success(function(data) {
+  console.log(data);
+    $scope.fields = data;
+  });
+   $scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
+ 
+});
+</script>
+</body>
+</html>
