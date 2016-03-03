@@ -3,9 +3,12 @@
 [x-ng-click] {
     cursor: pointer;
 }
+
 body{
 overflow-y: scroll;
-   
+
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    
 }
 .container{
 	width:100%;
