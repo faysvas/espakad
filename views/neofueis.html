@@ -1,0 +1,65 @@
+<table class="table table-condensed table-bordered" id="kadTable" ng-controller="neofueisCtrl">
+ <thead>
+
+    <tr>
+		<th id="row0" >Αρ.</th>
+        <th id="row1" ng-click="sort('FIELD1')">Τομέας</th>
+        <th id="row2" ng-click="sort('FIELD2')">2ψήφιος NACE</th>
+        <th id="row3" ng-click="sort('FIELD3')">3ψήφιος NACE</th>
+		<th id="row4" ng-click="sort('FIELD4')">4ψήφιος NACE</th>
+		<th id="row5" ng-click="sort('FIELD5')">Κωδικός Δραστηριότητας</th>
+		<th id="row6" ng-click="sort('FIELD6')">Επίπεδο</th>
+		<th id="row7"ng-click="sort('FIELD7')">Περιγραφή Δραστηριότητας</th>
+		<th id="row8"ng-click="sort('FIELD8')">Τομείς Προτεραιότητας</th>
+    </tr>
+	</thead>
+	<tbody>
+	
+	<tr>
+	<td><button class="btn" ng-click="search = ''"><span data-toggle="tooltip" data-placement="top" title="Καθαρισμός πεδίων" id="refreshButton" class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></td>
+	<td >
+ <select class="form-control" ng-model="search.FIELD1" ng-options="tomeas for tomeas in tomeis|unique:tomeas" ng-model-options="{debounce: 500}">
+ <option value="" disabled selected>Τομείς</option>
+        </select>
+</td>
+
+<td> <input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD2" ng-model-options="{debounce: 500}"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD3" ng-model-options="{debounce: 500}"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD4" ng-model-options="{debounce: 500}"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD5" ng-model-options="{debounce: 500}"></td>
+<td><select class="form-control" ng-model="search.FIELD3" ng-options="epipedo for epipedo in epipeda|unique:epipedo| orderBy:epipedo" ng-model-options="{debounce: 500}">
+ <option value="" disabled selected>Επίπεδα</option>
+        </select></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD7" ng-model-options="{debounce: 500}"></td>
+<td > <select class="form-control" ng-model="search.FIELD8" " ng-model-options="{debounce: 500}">
+<option value="" disabled selected>Τομείς Προτεραιότητας</option>
+
+<!-- ng-options="prot for prot in proter|unique:prot|orderBy:'-p' -->
+
+<option label="1. Αγροδιατροφή" value="1. Αγροδιατροφή">1. Αγροδιατροφή </option>
+<option label="2. Ενέργεια" value="2. Ενέργεια">2. Ενέργεια</option>
+<option label="3. Εφοδιαστ.Αλυσίδα" value="3. Εφοδιαστ.Αλυσίδα">3. Εφοδιαστ.Αλυσίδα</option>
+<option label="4. Πολιτ. &amp; Δημ. Βιομ." value="4. Πολιτ. &amp; Δημ. Βιομ.">4. Πολιτ. &amp; Δημ. Βιομ.</option>
+<option label="5. Περιβάλλον" value="5. Περιβάλλον">5. Περιβάλλον</option>
+<option label="7. ΤΠΕ" value="7. ΤΠΕ">7. ΤΠΕ</option>
+<option label="8. Υγεία" value="8. Υγεία">8. Υγεία</option>
+<option label="9. Υλικά-Κατασκ." value="9. Υλικά-Κατασκ.">9. Υλικά-Κατασκ.</option>  
+		</select>
+		
+		</td>
+		
+		
+</tr>
+     <tr  ng-animate="'animate'" dir-paginate="field in fields|orderBy:sortKey:reverse|filter:{FIELD1: search.FIELD1, FIELD2: search.FIELD2, FIELD3: search.FIELD3, FIELD4: search.FIELD4, FIELD5: search.FIELD5, FIELD6: search.FIELD6, FIELD7: search.FIELD7, FIELD8: search.FIELD8}|itemsPerPage:100">
+	 <td>{{::$index+1}}</td>
+        <td>{{::field.FIELD1}}</td>
+        <td>{{::field.FIELD2}}</td>
+        <td>{{::field.FIELD3}}</td>
+		<td>{{::field.FIELD4}}</td>
+		<td>{{::field.FIELD5}}</td>
+		<td>{{::field.FIELD6}}</td>
+		<td>{{::field.FIELD7}}</td>
+		<td>{{::field.FIELD8}}</td>
+    </tr>
+    </tbody>
+  </table>

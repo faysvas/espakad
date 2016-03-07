@@ -1,0 +1,57 @@
+
+<table class="table table-condensed table-bordered" id="kadTable" ng-controller="ptuxiouxoiCtrl">
+ <thead>
+
+    <tr>
+		<th id="row0" >Αρ.</th>
+		<th id="row2" ng-click="sort('FIELD1')">Α/Α</th>
+        <th id="row2" ng-click="sort('FIELD2')">Τομείς Κλάδοι NACE</th>
+        <th id="row3" ng-click="sort('FIELD3')">Τάξεις NACE</th>
+        <th id="row4" ng-click="sort('FIELD4')">Κατηγορίες CPA</th>
+		<th id="row5" ng-click="sort('FIELD5')">Υπόκατηγορίες CPA</th>
+		<th id="row6" ng-click="sort('FIELD6')">Εθνικές δραστηριότητες</th>
+		<th id="row7"ng-click="sort('FIELD7')">Περιγραφή Δραστηριότητας</th>
+		<th id="row8"ng-click="sort('FIELD8')">Κατηγοριοποίηση</th>
+    </tr>
+	</thead>
+	<tbody>
+	
+	<tr>
+		<td><button class="btn" ng-click="search = ''"><span data-toggle="tooltip" data-placement="top" title="Καθαρισμός πεδίων" id="refreshButton" class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></td>
+<td> <input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD1" ng-model-options="{debounce: 500}"></td>
+
+<td> <input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD2" ng-model-options="{debounce: 500}"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD3" ng-model-options="{debounce: 500}"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD4" ng-model-options="{debounce: 500}"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD5" ng-model-options="{debounce: 500}"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD6" ng-model-options="{debounce: 500}"></td>
+<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD7" ng-model-options="{debounce: 500}"></td>
+<td > <select class="form-control" ng-model="search.FIELD8" " ng-model-options="{debounce: 500}">
+<option value="" disabled selected>Κατηγορίες</option>
+
+<!-- ng-options="prot for prot in proter|unique:prot|orderBy:'-p' -->
+<option label="Επιλέξιμη" value="Επιλέξιμη">Επιλέξιμη</option>
+<option label="Δευτερεύουσα" value="Δευτερεύουσα">Δευτερεύουσα</option>
+
+
+		</select>
+		
+		</td>
+		
+		
+</tr>
+     <tr  ng-animate="'animate'" dir-paginate="field in fields|orderBy:sortKey:reverse|filter:{FIELD1: search.FIELD1, FIELD2: search.FIELD2, FIELD3: search.FIELD3, FIELD4: search.FIELD4, FIELD5: search.FIELD5, FIELD6: search.FIELD6, FIELD7: search.FIELD7, FIELD8: search.FIELD8}|itemsPerPage:100">
+	 <td></td>
+        <td>{{::field.FIELD1}}</td>
+        <td>{{::field.FIELD2}}</td>
+        <td>{{::field.FIELD3}}</td>
+		<td>{{::field.FIELD4}}</td>
+		<td>{{::field.FIELD5}}</td>
+		<td>{{::field.FIELD6}}</td>
+		<td>{{::field.FIELD7}}</td>
+		<td>{{::field.FIELD8}}</td>
+    </tr>
+    </tbody>
+  </table>
+ 
+
