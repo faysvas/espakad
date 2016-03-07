@@ -2,14 +2,13 @@
 <html>
 <head>
  <title>ΕΣΠΑ ΚΑΔ</title>
-  <meta name="description" content="Επιλέξιμοι Κωδικοί Αριθμοί Δραστηριοτήτων για το Πρόγραμμα 'Νεοφυής Επιχειρηματικότητα'">
+  <meta name="description" content='Εφαρμογή για εύκολη αναζήτηση και πλοήγηση στους Επιλέξιμους Κωδικούς Αριθμούς Δραστηριοτήτων (ΚΑΔ) των προγραμμάτων ΕΣΠΑ "Ενίσχυση της αυτοαπασχόλησης πτυχιούχων τριτοβάθμιας εκπαίδευσης", "Ενίσχυση τουριστικών μικρομεσαίων επιχειρήσεων (ΜΜΕ) για τον εκσυγχρονισμό τους και την ποιοτική αναβάθμιση των παρεχόμενων υπηρεσιών", "Νεοφυής Επιχειρηματικότητα" και "Αναβάθμιση πολύ μικρών & μικρών υφιστάμενων επιχειρήσεων με την ανάπτυξη των ικανοτήτων τους στις νέες αγορές".'>
+  <meta name="keywords" content="espa,espakad,εσπα,ΚΑΔ">
   <meta name="author" content="Golfo Vasiliou">
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
-<script src="js/dirPagination.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-animate.min.js"></script>
 <meta charset="UTF-8">
+
+
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/custom.css">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
@@ -20,96 +19,44 @@
     <!-- Custom styles for this template -->
 
 <style>
+#tourRow0{
+width:5%;
+}
+#tourRow1{
+width:20%;
+}
 
+#tourRow2{
+width:20%;
+}
+#tourRow3{
+width:5%;
+}
+#tourRow4{
+width:50%;
+}
 </style>
 </head>
 <body>
-<div class="container"  ng-cloak ng-app="espaApp" ng-controller="espaCtrl">
+<div class="container"  ng-cloak ng-app="espaApp" >
 <div class="row">
 <header class="col-sm-12 text-center "><h1>ΕΣΠΑ ΚΑΔ</h1><p>Αναζήτηση με βάση πολλαπλά κριτήρια στους Κωδικούς Αριθμούς Δραστηριοτήτων για τα Προγράμματα ΕΣΠΑ</p><hr>
 </header>
 </div>
 <ul class="nav nav-tabs" role="tablist">
 
-    <li class="active" role="presentation" ><a   href="index.html" aria-controls="neofueis" role="tab" data-toggle="tab">Νεοφυής Επιχειρηματικότητα</a></li>
-    <li role="presentation"><a href="ptuxiouxoi.html" aria-controls="ptuxiouxoi" role="tab" data-toggle="tab">Αυτοαπασχόληση Πτυχιούχων</a></li>
-	<li role="presentation"><a href="touristikes.html" aria-controls="touristikes" role="tab" data-toggle="tab">Τουριστικές Επιχειρήσεις</a></li>
-	<li role="presentation"><a href="mikromesaies.html" aria-controls="mikromesaies" role="tab" data-toggle="tab">Μικρομεσαίες Επιχειρήσεις</a></li>
+    <li class="active" role="presentation" ><a href="#/neofueis" aria-controls="neofueis" role="tab" data-toggle="tab">Νεοφυής Επιχειρηματικότητα</a></li>
+    <li role="presentation"><a href="#/ptuxiouxoi" aria-controls="ptuxiouxoi" role="tab" data-toggle="tab">Αυτοαπασχόληση Πτυχιούχων</a></li>
+	<li role="presentation"><a href="#/touristikes" aria-controls="touristikes" role="tab" data-toggle="tab">Τουριστικές Επιχειρήσεις</a></li>
+	<li role="presentation"><a href="#/mikromesaies" aria-controls="mikromesaies" role="tab" data-toggle="tab">Μικρομεσαίες Επιχειρήσεις</a></li>
 
   </ul>
 <div class="row">
 <main class="col-sm-12">
+   <div class="table-responsive" ng-view>
+
+
   
-   <div class="table-responsive">
-    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-<table class="table table-condensed table-bordered" id="kadTable">
- <thead>
-
-    <tr>
-		<th id="row0" >Αρ.</th>
-        <th id="row1" ng-click="sort('FIELD1')">Τομέας</th>
-        <th id="row2" ng-click="sort('FIELD2')">2ψήφιος NACE</th>
-        <th id="row3" ng-click="sort('FIELD3')">3ψήφιος NACE</th>
-		<th id="row4" ng-click="sort('FIELD4')">4ψήφιος NACE</th>
-		<th id="row5" ng-click="sort('FIELD5')">Κωδικός Δραστηριότητας</th>
-		<th id="row6" ng-click="sort('FIELD6')">Επίπεδο</th>
-		<th id="row7"ng-click="sort('FIELD7')">Περιγραφή Δραστηριότητας</th>
-		<th id="row8"ng-click="sort('FIELD8')">Τομείς Προτεραιότητας</th>
-    </tr>
-	</thead>
-	<tbody>
-	
-	<tr>
-	<td><button class="btn" ng-click="search = ''"><span data-toggle="tooltip" data-placement="top" title="Καθαρισμός πεδίων" id="refreshButton" class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></td>
-	<td >
- <select class="form-control" ng-model="search.FIELD1" ng-options="tomeas for tomeas in tomeis|unique:tomeas" ng-model-options="{debounce: 500}">
- <option value="" disabled selected>Τομείς</option>
-        </select>
-</td>
-
-<td> <input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD2" ng-model-options="{debounce: 500}"></td>
-<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD3" ng-model-options="{debounce: 500}"></td>
-<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD4" ng-model-options="{debounce: 500}"></td>
-<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD5" ng-model-options="{debounce: 500}"></td>
-<td><select class="form-control" ng-model="search.FIELD3" ng-options="epipedo for epipedo in epipeda|unique:epipedo| orderBy:epipedo" ng-model-options="{debounce: 500}">
- <option value="" disabled selected>Επίπεδα</option>
-        </select></td>
-<td><input type="text" class="form-control" placeholder="Αναζήτηση" ng-model="search.FIELD7" ng-model-options="{debounce: 500}"></td>
-<td > <select class="form-control" ng-model="search.FIELD8" " ng-model-options="{debounce: 500}">
-<option value="" disabled selected>Τομείς Προτεραιότητας</option>
-
-<!-- ng-options="prot for prot in proter|unique:prot|orderBy:'-p' -->
-
-<option label="1. Αγροδιατροφή" value="1. Αγροδιατροφή">1. Αγροδιατροφή </option>
-<option label="2. Ενέργεια" value="2. Ενέργεια">2. Ενέργεια</option>
-<option label="3. Εφοδιαστ.Αλυσίδα" value="3. Εφοδιαστ.Αλυσίδα">3. Εφοδιαστ.Αλυσίδα</option>
-<option label="4. Πολιτ. &amp; Δημ. Βιομ." value="4. Πολιτ. &amp; Δημ. Βιομ.">4. Πολιτ. &amp; Δημ. Βιομ.</option>
-<option label="5. Περιβάλλον" value="5. Περιβάλλον">5. Περιβάλλον</option>
-<option label="7. ΤΠΕ" value="7. ΤΠΕ">7. ΤΠΕ</option>
-<option label="8. Υγεία" value="8. Υγεία">8. Υγεία</option>
-<option label="9. Υλικά-Κατασκ." value="9. Υλικά-Κατασκ.">9. Υλικά-Κατασκ.</option>  
-		</select>
-		
-		</td>
-		
-		
-</tr>
-     <tr  ng-animate="'animate'" dir-paginate="field in fields|orderBy:sortKey:reverse|filter:{FIELD1: search.FIELD1, FIELD2: search.FIELD2, FIELD3: search.FIELD3, FIELD4: search.FIELD4, FIELD5: search.FIELD5, FIELD6: search.FIELD6, FIELD7: search.FIELD7, FIELD8: search.FIELD8}|itemsPerPage:100">
-	 <td>{{::$index+1}}</td>
-        <td>{{::field.FIELD1}}</td>
-        <td>{{::field.FIELD2}}</td>
-        <td>{{::field.FIELD3}}</td>
-		<td>{{::field.FIELD4}}</td>
-		<td>{{::field.FIELD5}}</td>
-		<td>{{::field.FIELD6}}</td>
-		<td>{{::field.FIELD7}}</td>
-		<td>{{::field.FIELD8}}</td>
-    </tr>
-    </tbody>
-  </table>
-  </div>
   </div>
   <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" >
     </dir-pagination-controls>
@@ -119,35 +66,19 @@
 Made by <a href="https://github.com/faysvas">Golfo Vasiliou</a> and hosted on <a href="https://github.com/faysvas/espakad">Github</a>.
 </footer>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
 
 
-<script>
-var espaApp = angular.module('espaApp', ['ngAnimate','angularUtils.directives.dirPagination','angular.filter']);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-animate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.min.js"></script>
+<script src="js/dirPagination.js"></script>
+ <script src="js/app.js"></script>
+ <script src="js/helpers.js"></script>
+  <script src="js/controllers.js"></script>
+  
 
-espaApp.controller('espaCtrl', function ($scope, $http) {
-$scope.reverse = true;
-$scope.tomeis=[];
-$scope.proter=[];
-$scope.epipeda=[];
-  $http.get('json/neofuhs_espa.json').success(function(data) {
- for(var key in data){
-	$scope.tomeis.push(data[key].FIELD1);
-	$scope.proter.push(data[key].FIELD8);
-	$scope.epipeda.push(data[key].FIELD6);
-	}
-	
-	
-    $scope.fields = data;
-  });
-   $scope.sort = function(keyname){
-        $scope.sortKey = keyname;   //set the sortKey to the param passed
-        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
-    }
- 
-});
-
-
-</script>
   <!-- js placed at the end of the document so the pages load faster -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
